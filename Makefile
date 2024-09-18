@@ -2,7 +2,7 @@
 LIBBPF_DIR = /usr/local/libbpf
 KERNEL_HEADERS_DIR = $(shell echo "/usr/src/linux-headers-$(shell uname -r)" | xargs)
 INCLUDES = -I$(LIBBPF_DIR)/include/uapi -I$(LIBBPF_DIR)/include -I$(KERNEL_HEADERS_DIR)/include -I$(KERNEL_HEADERS_DIR)/arch/x86/include/uapi
-CLANG = clang
+CLANG = clang-15
 CC = gcc
 
 # Build flags
@@ -21,7 +21,7 @@ USER_OBJECTS = $(OBJ_DIR)/userspace_app
 # BPF target
 $(BPF_OBJECTS): $(SRC_DIR)/ebpf_websocket.c
 	mkdir -p $(OBJ_DIR)
-	$(CLANG) -O2 -g -target bpf -D__TARGET_ARCH_x86 $(INCLUDES) -c $< -o $@
+	$(CLANG) -O2 -g -target bpf -D__TARGET_ARCH_x86 $(INCLUDES) -v -c $< -o $@
 
 # Userspace target
 $(USER_OBJECTS): $(SRC_DIR)/userspace_app.c
@@ -41,9 +41,9 @@ install-deps:
 	sudo apt-get install libc6-dev -y
 	sudo apt-get install gcc-multilib -y
 
-	sudo apt-get install linux-headers-generic
-	sudo apt-get install linux-headers-$(uname -r)
-	sudo apt-get install libglib2.0-dev libmicrohttpd-dev libelf-dev libssl-dev clang llvm libbpf-dev libbpfcc-dev
+	sudo apt-get install linux-headers-generic -y
+	sudo apt-get install linux-headers-$(uname -r) -y
+	sudo apt-get install libglib2.0-dev libmicrohttpd-dev libelf-dev libssl-dev clang llvm libbpf-dev libbpfcc-dev -y
 
 # Set up libbpf (optional)
 setup-libbpf:
