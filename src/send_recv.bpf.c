@@ -5,6 +5,7 @@
 #include <linux/sched.h>       // For task_struct (if needed)
 #include <linux/unistd.h>      // For syscall numbers (optional)
 #include <linux/string.h>      // For string operations like bpf_probe_read
+#include "vmlinux.h"
 
 struct event {
     u32 pid;
