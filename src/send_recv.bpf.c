@@ -1,10 +1,4 @@
-#include <linux/bpf.h>         // Core BPF definitions
-#include <linux/ptrace.h>      // For bpf_trace_event (syscall arguments)
-#include <linux/types.h>       // For u32, u64
 #include <bpf/bpf_helpers.h>   // For BPF helper functions
-#include <linux/sched.h>       // For task_struct (if needed)
-#include <linux/unistd.h>      // For syscall numbers (optional)
-#include <linux/string.h>      // For string operations like bpf_probe_read
 #include "vmlinux.h"
 
 struct event {
